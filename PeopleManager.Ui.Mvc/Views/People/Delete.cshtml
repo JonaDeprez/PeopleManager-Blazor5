@@ -1,0 +1,13 @@
+﻿@model PersonResult
+
+@{
+    ViewBag.Title = "Delete Person";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<form method="post">
+    <p>Are you sure you want to delete @Model.FirstName @Model.LastName (@Model.Email)?</p>
+    <a asp-action="Index" class="btn btn-light">&lt; No</a>
+    <button type="submit" class="btn btn-danger">Yes</button>
+</form>

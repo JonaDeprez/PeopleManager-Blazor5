@@ -1,0 +1,24 @@
+﻿@model PersonRequest
+
+<div asp-validation-summary="ModelOnly"></div>
+
+<div class="mb-3">
+    <label asp-for="FirstName" class="form-label"></label>
+    <input asp-for="FirstName" class="form-control" />
+    <span asp-validation-for="FirstName"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="LastName" class="form-label">Last Name</label>
+    <input asp-for="LastName" class="form-control" />
+    <span asp-validation-for="LastName"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Email" class="form-label"></label>
+    <input asp-for="Email" class="form-control" />
+    <span asp-validation-for="Email"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Description" class="form-label"></label>
+    <textarea asp-for="Description" class="form-control"></textarea>
+    <span asp-validation-for="Description"></span>
+</div>

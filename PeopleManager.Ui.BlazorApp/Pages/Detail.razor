@@ -1,0 +1,42 @@
+﻿@page "/home/detail/{id:int}"
+
+@using PeopleManager.Dto.Results
+@using PeopleManager.Sdk
+
+@inject PersonApiService PersonApiService
+
+<h3>Detail</h3>
+
+@if (Model is not null)
+{
+    <div class="row">
+        <div class="col-4"><strong>First name:</strong></div>
+        <div class="col-8">@Model.FirstName</div>
+    </div>
+    <div class="row">
+        <div class="col-4"><strong>Last name:</strong></div>
+        <div class="col-8">@Model.LastName</div>
+    </div>
+    <div class="row">
+        <div class="col-4"><strong>Email:</strong></div>
+        <div class="col-8">@Model.Email</div>
+    </div>
+    <div class="row">
+        <div class="col-4"><strong>Description:</strong></div>
+        <div class="col-8">@Model.Description</div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private PersonResult? Model { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Model = await PersonApiService.GetAsync(Id);
+        await base.OnInitializedAsync();
+    }
+
+}

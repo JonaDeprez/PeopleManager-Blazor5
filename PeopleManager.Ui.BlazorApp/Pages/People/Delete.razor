@@ -1,0 +1,24 @@
+﻿@page "/people/delete/{id:int}"
+
+@using PeopleManager.Sdk
+
+@inject PersonApiService PersonApiService
+@inject NavigationManager NavigationManager
+
+<h3>Delete</h3>
+
+<p>Are you sure you want to delete this?</p>
+
+<a class="btn btn-primary" href="people">No</a>
+<button class="btn btn-danger" @onclick="ExecuteDelete">Yes</button>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private async Task ExecuteDelete()
+    {
+        await PersonApiService.DeleteAsync(Id);
+        NavigationManager.NavigateTo("people");
+    }
+}

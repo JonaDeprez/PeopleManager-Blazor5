@@ -1,0 +1,33 @@
+﻿@page "/"
+@using PeopleManager.Dto.Results
+@using PeopleManager.Sdk
+
+@inject PersonApiService PersonApiService
+
+<PageTitle>People Manager</PageTitle>
+
+<h1>People Manager</h1>
+
+
+<div class="row">
+    @foreach (var person in Model)
+    {
+        <div class="col-4">
+            <PersonCard Model="@person" />
+        </div>
+    }
+</div>
+
+@code
+{
+    private IList<PersonResult> Model { get; set; } = new List<PersonResult>();
+   
+    protected override async Task OnInitializedAsync()
+    {
+        var serviceResult = await PersonApiService.FindAsync();
+
+        Model = serviceResult.Data;
+
+        await base.OnInitializedAsync();
+    }
+}

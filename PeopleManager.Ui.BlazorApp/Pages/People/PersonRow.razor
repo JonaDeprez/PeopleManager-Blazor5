@@ -1,0 +1,18 @@
+﻿@using PeopleManager.Dto.Results
+
+@if (Model is not null)
+{
+    <tr>
+        <td>@Model.FirstName</td>
+        <td>@Model.LastName</td>
+        <td>
+            <a class="btn btn-secondary" href="people/edit/@Model.Id">Edit</a>
+            <a class="btn btn-danger" href="people/delete/@Model.Id">Delete</a>
+        </td>
+    </tr>
+}
+
+@code {
+    [Parameter]
+    public PersonResult? Model { get; set; }
+}

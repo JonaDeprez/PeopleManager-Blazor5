@@ -1,0 +1,22 @@
+﻿@using PeopleManager.Dto.Requests
+
+@if (Model is not null)
+{
+    <div class="form-group">
+        <label for="LicensePlate">License plate</label>
+        <InputText @bind-Value="Model.LicensePlate" class="form-control" id="LicensePlate"/>
+    </div>
+    <div class="form-group">
+        <label for="Brand">Brand</label>
+        <InputText @bind-Value="Model.Brand" class="form-control" id="Brand"/>
+    </div>
+    <div class="form-group">
+        <label for="Type">Type</label>
+        <InputText @bind-Value="Model.Type" class="form-control" id="Type"/>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public VehicleRequest? Model { get; set; } 
+}

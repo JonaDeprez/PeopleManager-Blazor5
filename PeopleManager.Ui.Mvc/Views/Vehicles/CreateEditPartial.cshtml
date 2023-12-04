@@ -1,0 +1,33 @@
+﻿@model VehicleRequest
+
+@{
+    var people = (IList<PersonResult>)ViewBag.People;
+}
+
+<div asp-validation-summary="ModelOnly"></div>
+
+<div class="mb-3">
+    <label asp-for="LicensePlate" class="form-label"></label>
+    <input asp-for="LicensePlate" class="form-control" />
+    <span asp-validation-for="LicensePlate"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Brand" class="form-label"></label>
+    <input asp-for="Brand" class="form-control" />
+    <span asp-validation-for="Brand"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="Type" class="form-label"></label>
+    <input asp-for="Type" class="form-control" />
+    <span asp-validation-for="Type"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="ResponsiblePersonId" class="form-label">Choose a responsible person:</label>
+    <select asp-for="ResponsiblePersonId" class="form-control">
+        <option value="">No responsible person</option>
+        @foreach (var person in people)
+        {
+            <option value="@person.Id">@person.FirstName @person.LastName</option>
+        }
+    </select>
+</div>

@@ -1,0 +1,38 @@
+﻿@page "/vehicles"
+
+@using PeopleManager.Dto.Results
+@using PeopleManager.Sdk
+
+@inject VehicleApiService VehicleApiService
+
+<h3>Manage Vehicles</h3>
+<a class="btn btn-primary" href="vehicles/create">New Vehicle</a>
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th>License Plate</th>
+            <th>Brand</th>
+            <th>Type</th>
+            <th>Responsible Person</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Vehicles)
+        {
+            <VehicleRow Model="@vehicle"></VehicleRow>
+        }
+    </tbody>
+</table>
+
+@code {
+    private IList<VehicleResult> Vehicles { get; set; } = new List<VehicleResult>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var vehiclesResult = await VehicleApiService.Find();
+        Vehicles = vehiclesResult.Data;
+        await base.OnInitializedAsync();
+    }
+
+}

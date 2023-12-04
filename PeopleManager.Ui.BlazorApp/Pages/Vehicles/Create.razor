@@ -1,0 +1,32 @@
+﻿@page "/vehicles/create"
+
+@using PeopleManager.Dto.Requests
+@using PeopleManager.Sdk
+
+@inject VehicleApiService VehicleApiService
+@inject NavigationManager NavigationManager
+
+<h3>Create a new vehicle</h3>
+
+<EditForm Model="Model" OnValidSubmit="ValidSubmit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    
+    <CreateEdit Model="@Model"></CreateEdit>
+    
+    <button type="submit" class="btn btn-primary">Create</button>
+</EditForm>
+
+@code {
+    private VehicleRequest Model { get; set; } = new VehicleRequest
+    {
+        LicensePlate = string.Empty
+    };
+    
+    private async Task ValidSubmit()
+    {
+        await VehicleApiService.Create(Model);
+        NavigationManager.NavigateTo("vehicles");
+    }
+
+}

@@ -1,0 +1,20 @@
+﻿@using PeopleManager.Dto.Results
+
+@if (Model is not null)
+{
+    <tr>
+        <td>@Model.LicensePlate</td>
+        <td>@Model.Brand</td>
+        <td>@Model.Type</td>
+        <td>@Model.ResponsiblePersonFirstName @Model.ResponsiblePersonLastName</td>
+        <td>
+            <a class="btn btn-secondary" href="vehicles/edit/@Model.Id">Edit</a>
+            <a class="btn btn-danger" href="vehicles/delete/@Model.Id">Delete</a>
+        </td>
+    </tr>
+}
+
+@code {
+    [Parameter]
+    public VehicleResult? Model { get; set; }
+}

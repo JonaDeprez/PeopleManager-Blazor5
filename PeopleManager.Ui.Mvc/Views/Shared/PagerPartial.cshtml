@@ -1,0 +1,45 @@
+﻿@using Vives.Services.Model.Abstractions;
+@model IPagedServiceResult
+
+@{
+    var numberOfPages = Model.TotalCount / Model.Paging.PageSize;
+    var previousStartIndex = Model.Paging.StartIndex - Model.Paging.PageSize;
+    var nextStartIndex = Model.Paging.StartIndex + Model.Paging.PageSize;
+    var lastStartIndex = numberOfPages * Model.Paging.PageSize;
+    var currentPageIndex = Model.Paging.StartIndex / Model.Paging.PageSize;
+}
+<div class="btn-group" role="group" aria-label="Pager">
+
+    <a class="btn btn-outline-primary"
+       asp-route-startIndex="0"
+       asp-route-pageSize="@Model.Paging.PageSize">First</a>
+    <a class="btn btn-outline-primary"
+       asp-route-startIndex="@previousStartIndex"
+       asp-route-pageSize="@Model.Paging.PageSize">Previous</a>
+
+    @for (int pageIndex = 0; pageIndex <= numberOfPages; pageIndex++)
+    {
+        var startIndex = pageIndex * Model.Paging.PageSize;
+        var visiblePageIndex = pageIndex + 1;
+
+        var buttonStyle = "btn-primary";
+        if (pageIndex == currentPageIndex)
+        {
+            buttonStyle = "btn-outline-secondary";
+        }
+
+        <a class="btn @buttonStyle"
+           asp-route-startIndex="@startIndex"
+           asp-route-pageSize="@Model.Paging.PageSize">
+            @visiblePageIndex
+        </a>
+    }
+
+    <a class="btn btn-outline-primary"
+       asp-route-startIndex="@nextStartIndex"
+       asp-route-pageSize="@Model.Paging.PageSize">Next</a>
+    <a class="btn btn-outline-primary"
+       asp-route-startIndex="@lastStartIndex"
+       asp-route-pageSize="@Model.Paging.PageSize">Last</a>
+
+</div>

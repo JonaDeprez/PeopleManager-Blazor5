@@ -1,0 +1,15 @@
+﻿@model VehicleResult
+
+@{
+    ViewBag.Title = "Delete Vehicle";
+}
+
+<h1>@ViewBag.Title</h1>
+
+<form method="post">
+    <p>
+        Are you sure you want to delete @Model.LicensePlate?
+    </p>
+    <a asp-action="Index" class="btn btn-light">&lt; No</a>
+    <button type="submit" class="btn btn-danger">Yes</button>
+</form>

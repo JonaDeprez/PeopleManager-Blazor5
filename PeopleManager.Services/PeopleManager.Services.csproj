@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PeopleManager.Core\PeopleManager.Core.csproj" />
+    <ProjectReference Include="..\PeopleManager.Dto\PeopleManager.Dto.csproj" />
+    <ProjectReference Include="..\Vives.Services.Model\Vives.Services.Model.csproj" />
+  </ItemGroup>
+
+</Project>

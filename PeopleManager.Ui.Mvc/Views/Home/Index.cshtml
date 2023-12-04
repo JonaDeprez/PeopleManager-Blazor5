@@ -1,0 +1,19 @@
+﻿@model IList<PersonResult>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome Bavo</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="row">
+    @foreach (var person in Model)
+    {
+        <div class="col-4">
+            <partial name="PersonCardPartial" model="person"/>
+        </div>
+    }
+</div>

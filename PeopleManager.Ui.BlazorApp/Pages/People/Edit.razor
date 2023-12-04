@@ -1,0 +1,62 @@
+﻿@page "/people/edit/{id:int}"
+
+@using PeopleManager.Dto.Requests
+@using PeopleManager.Sdk
+
+@inject PersonApiService PersonApiService
+@inject NavigationManager NavigationManager
+
+<h3>Create a new person</h3>
+
+@if (Model is not null)
+{
+    <EditForm Model="Model" OnValidSubmit="ValidSubmit">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+
+        <CreateEdit Model="@Model"></CreateEdit>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </EditForm>
+}
+
+@code {
+    private PersonRequest? Model { get; set; } 
+
+    [Parameter]
+    public int Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadModel();
+
+        await base.OnInitializedAsync();
+    }
+
+    private async Task LoadModel()
+    {
+        var personResult = await PersonApiService.GetAsync(Id);
+        if (personResult is null)
+        {
+            return;
+        }
+        Model = new PersonRequest
+        {
+            FirstName = personResult.FirstName,
+            LastName = personResult.LastName,
+            Email = personResult.Email,
+            Description = personResult.Description
+        };
+    }
+
+    private async Task ValidSubmit()
+    {
+        if (Model is null)
+        {
+            return;
+        }
+        await PersonApiService.UpdateAsync(Id, Model);
+        NavigationManager.NavigateTo("people");
+    }
+
+}

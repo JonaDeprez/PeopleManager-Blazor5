@@ -1,0 +1,34 @@
+﻿@page "/people/create"
+
+@using PeopleManager.Dto.Requests
+@using PeopleManager.Sdk
+
+@inject PersonApiService PersonApiService
+@inject NavigationManager NavigationManager
+
+<h3>Create a new person</h3>
+
+<EditForm Model="Model" OnValidSubmit="ValidSubmit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+    
+    <CreateEdit Model="@Model"></CreateEdit>
+    
+    <button type="submit" class="btn btn-primary">Create</button>
+</EditForm>
+
+@code {
+    private PersonRequest Model { get; set; } = new PersonRequest
+    {
+        FirstName = string.Empty, 
+        LastName = string.Empty,
+        Email = string.Empty
+    };
+    
+    private async Task ValidSubmit()
+    {
+        await PersonApiService.CreateAsync(Model);
+        NavigationManager.NavigateTo("people");
+    }
+
+}
